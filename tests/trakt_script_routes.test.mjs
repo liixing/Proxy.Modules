@@ -368,18 +368,17 @@ test("TMDB 详情在自定义序号下只注入排序 1 的播放器", async () 
             "user-agent": "Sofa Time/1.0",
         },
         argument: {
-            eplayerxButtonOrder: 3,
-            forwardButtonOrder: 1,
-            infuseButtonOrder: 2,
+            eplayerxButtonOrder: 2,
+            infuseButtonOrder: 1,
         },
     });
 
     const payload = JSON.parse(result.body);
     const us = payload["watch/providers"].results.US;
-    assert.equal(us.link, "https://fwds.cc/tmdb?type=tv&id=108978");
+    assert.equal(us.link, "infuse://series/108978");
     assert.equal(us.flatrate.length, 1);
-    assert.equal(us.flatrate[0].provider_id, 2);
-    assert.equal(us.flatrate[0].provider_name, "Forward");
+    assert.equal(us.flatrate[0].provider_id, 3);
+    assert.equal(us.flatrate[0].provider_name, "Infuse");
 });
 
 test("TMDB 详情在部分序号为 0 时只注入序号非 0 的最前播放器", async () => {
@@ -391,15 +390,15 @@ test("TMDB 详情在部分序号为 0 时只注入序号非 0 的最前播放器
         },
         argument: {
             eplayerxButtonOrder: 0,
-            forwardButtonOrder: 1,
-            infuseButtonOrder: 2,
+            infuseButtonOrder: 1,
         },
     });
 
     const payload = JSON.parse(result.body);
     const us = payload["watch/providers"].results.US;
-    assert.equal(us.flatrate[0].provider_id, 2);
-    assert.equal(us.flatrate[0].provider_name, "Forward");
+    assert.equal(us.flatrate[0].provider_id, 3);
+    assert.equal(us.flatrate[0].provider_name, "Infuse");
+    assert.equal(us.link, "infuse://series/108978");
 });
 
 test("TMDB 详情在全部序号为 0 时不注入任何播放器", async () => {
@@ -411,9 +410,7 @@ test("TMDB 详情在全部序号为 0 时不注入任何播放器", async () => 
         },
         argument: {
             eplayerxButtonOrder: 0,
-            forwardButtonOrder: 0,
             infuseButtonOrder: 0,
-            rexButtonOrder: 0,
         },
     });
 
@@ -505,11 +502,15 @@ test("TMDb provider catalog 会注入自定义 provider", async () => {
 
     const payload = JSON.parse(result.body);
     assert.deepEqual(
-        payload.results.slice(0, 3).map((item) => item.provider_id),
-        [1, 2, 3],
+        payload.results.slice(0, 2).map((item) => item.provider_id),
+        [1, 3],
+    );
+    assert.deepEqual(
+        payload.results.slice(0, 2).map((item) => item.provider_name),
+        ["EplayerX", "Infuse"],
     );
     assert.ok(payload.results.some((item) => item.provider_id === 8));
-    assert.equal(payload.results.filter((item) => item.provider_id === 2).length, 1);
+    assert.equal(payload.results.filter((item) => item.provider_name === "Forward").length, 1);
 });
 
 test("TMDb provider catalog 在自定义序号下会按序号升序重排自定义 provider", async () => {
@@ -520,16 +521,15 @@ test("TMDb provider catalog 在自定义序号下会按序号升序重排自定�
             "user-agent": "Sofa Time/1.0",
         },
         argument: {
-            eplayerxButtonOrder: 3,
-            forwardButtonOrder: 1,
-            infuseButtonOrder: 2,
+            eplayerxButtonOrder: 2,
+            infuseButtonOrder: 1,
         },
     });
 
     const payload = JSON.parse(result.body);
     assert.deepEqual(
-        payload.results.slice(0, 3).map((item) => item.provider_id),
-        [2, 3, 1],
+        payload.results.slice(0, 2).map((item) => item.provider_id),
+        [3, 1],
     );
 });
 
@@ -542,16 +542,14 @@ test("TMDb provider catalog 在全部序号为 0 时仍保留全部自定义 pro
         },
         argument: {
             eplayerxButtonOrder: 0,
-            forwardButtonOrder: 0,
             infuseButtonOrder: 0,
-            rexButtonOrder: 0,
         },
     });
 
     const payload = JSON.parse(result.body);
     assert.deepEqual(
-        payload.results.slice(0, 3).map((item) => item.provider_id),
-        [1, 2, 3],
+        payload.results.slice(0, 2).map((item) => item.provider_id),
+        [1, 3],
     );
 });
 

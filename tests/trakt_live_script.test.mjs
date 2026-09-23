@@ -292,7 +292,7 @@ test("live script: /movies/:id/watchnow 响应会注入自定义播放器条目"
     });
 
     assert.equal(allSources.includes("eplayerx"), true);
-    assert.equal(allSources.includes("forward"), true);
+    assert.equal(allSources.includes("forward"), false);
     assert.equal(allSources.includes("infuse"), true);
     assert.equal(
         httpLogs.some((log) => /\?extended=cloud9,full,watchnow$/.test(log.url)),
@@ -324,7 +324,7 @@ test("live script: /users/settings 响应会注入 vip、关闭广告并补 watc
     assert.equal(payload.account.display_ads, false);
     assert.ok(Array.isArray(payload.browsing?.watchnow?.favorites));
     assert.equal(payload.browsing.watchnow.favorites.includes("us-eplayerx"), true);
-    assert.equal(payload.browsing.watchnow.favorites.includes("us-forward"), true);
+    assert.equal(payload.browsing.watchnow.favorites.includes("us-forward"), false);
     assert.equal(payload.browsing.watchnow.favorites.includes("us-infuse"), true);
 });
 
@@ -1480,7 +1480,8 @@ test("live script: response route coverage matrix covers all response phase rout
             assertPayload(payload) {
                 assert.equal(payload.user.vip, true);
                 assert.equal(payload.account.display_ads, false);
-                assert.equal(payload.browsing.watchnow.favorites.includes("sg-forward"), true);
+                assert.equal(payload.browsing.watchnow.favorites.includes("sg-infuse"), true);
+                assert.equal(payload.browsing.watchnow.favorites.includes("sg-forward"), false);
             },
         },
         {
@@ -1491,7 +1492,7 @@ test("live script: response route coverage matrix covers all response phase rout
             },
             assertPayload(payload) {
                 assert.equal(
-                    payload.results.some((item) => item.provider_id === 2),
+                    payload.results.some((item) => item.provider_id === 3),
                     true,
                 );
             },
@@ -1504,7 +1505,7 @@ test("live script: response route coverage matrix covers all response phase rout
             },
             assertPayload(payload) {
                 assert.equal(
-                    payload.results.some((item) => item.provider_id === 2),
+                    payload.results.some((item) => item.provider_id === 3),
                     true,
                 );
             },
@@ -1538,7 +1539,7 @@ test("live script: response route coverage matrix covers all response phase rout
             body: readFixture("watchnow-sources.json"),
             assertPayload(payload) {
                 assert.equal(
-                    payload.some((item) => Array.isArray(item.sg) && item.sg.some((source) => source.source === "forward")),
+                    payload.some((item) => Array.isArray(item.sg) && item.sg.some((source) => source.source === "infuse")),
                     true,
                 );
             },
@@ -1651,7 +1652,7 @@ test("live script: response route coverage matrix covers all response phase rout
             }),
             assertPayload(payload) {
                 assert.equal(
-                    payload.us.free.some((item) => item.source === "forward"),
+                    payload.us.free.some((item) => item.source === "infuse"),
                     true,
                 );
             },
@@ -1671,7 +1672,7 @@ test("live script: response route coverage matrix covers all response phase rout
             }),
             assertPayload(payload) {
                 assert.equal(
-                    payload.us.free.some((item) => item.source === "forward"),
+                    payload.us.free.some((item) => item.source === "infuse"),
                     true,
                 );
             },
@@ -1698,7 +1699,7 @@ test("live script: response route coverage matrix covers all response phase rout
             }),
             assertPayload(payload) {
                 assert.equal(
-                    payload.us.free.some((item) => item.source === "forward"),
+                    payload.us.free.some((item) => item.source === "infuse"),
                     true,
                 );
             },
@@ -1927,12 +1928,12 @@ test("live script: request route coverage matrix covers all request phase routes
             },
         },
         {
-            url: "https://image.tmdb.org/t/p/w342/forward_logo.webp",
+            url: "https://image.tmdb.org/t/p/w342/eplayerx_logo.webp",
             assertResult(result) {
                 assert.equal(result.response.status, 302);
                 assert.equal(
                     result.response.headers.Location,
-                    "https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/images/forward_logo.webp",
+                    "https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/images/eplayerx_logo.webp",
                 );
             },
         },

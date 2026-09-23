@@ -5,9 +5,7 @@ import * as commonUtils from "./utils/common.mjs";
 
 const PLAYER_BUTTON_ARGUMENT_GROUP_KEYS = {
     eplayerxButtonOrder: "eplayerx",
-    forwardButtonOrder: "forward",
     infuseButtonOrder: "infuse",
-    rexButtonOrder: "rex",
 };
 
 const ARGUMENT_FIELDS = argumentFields.map((field) => {
@@ -18,9 +16,7 @@ const ARGUMENT_FIELDS = argumentFields.map((field) => {
 function createDefaultPlayerButtonOrderConfig() {
     return {
         eplayerx: 1,
-        forward: 2,
-        infuse: 3,
-        rex: 4,
+        infuse: 2,
     };
 }
 

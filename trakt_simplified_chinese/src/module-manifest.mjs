@@ -1,5 +1,5 @@
-const REPOSITORY_URL = "https://github.com/DemoJameson/Proxy.Modules";
-const RAW_BASE_URL = "https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main";
+const REPOSITORY_URL = "https://github.com/liixing/Proxy.Modules";
+const RAW_BASE_URL = "https://raw.githubusercontent.com/liixing/Proxy.Modules/main";
 const TRAKT_MODULE_PATH = "trakt_simplified_chinese";
 const TRAKT_SCRIPT_FILE = "trakt_simplified_chinese.js";
 const TRAKT_SCRIPT_TITLE = "Trakt增强";
@@ -217,10 +217,10 @@ const boxjs = {
         descsHtml: [
             metadata.description,
             `点此直达 <a href="${REPOSITORY_URL}/tree/main/${TRAKT_MODULE_PATH}">项目目录</a>`,
-            'Egern 安装：<a href="egern:/modules/new?name=%E4%BC%98%E5%8C%96%20Trakt%20%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E4%BD%93%E9%AA%8C&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2FDemoJameson%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.plugin">安装模块</a>',
-            'Loon 安装：<a href="https://www.nsloon.com/openloon/import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2FDemoJameson%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.plugin">安装插件</a>',
-            'Surge 安装：<a href="surge:///install-module?url=https%3A%2F%2Fraw.githubusercontent.com%2FDemoJameson%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.sgmodule">安装模块</a>',
-            'QX 安装：<a href="https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2FDemoJameson%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.snippet%2C%20tag%3DTrakt%20Simplified%20Chinese%2C%20enabled%3Dtrue%22%5D%7D">安装片段</a>',
+            'Egern 安装：<a href="egern:/modules/new?name=%E4%BC%98%E5%8C%96%20Trakt%20%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E4%BD%93%E9%AA%8C&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.plugin">安装模块</a>',
+            'Loon 安装：<a href="https://www.nsloon.com/openloon/import?plugin=https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.plugin">安装插件</a>',
+            'Surge 安装：<a href="surge:///install-module?url=https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.sgmodule">安装模块</a>',
+            'QX 安装：<a href="https://quantumult.app/x/open-app/add-resource?remote-resource=%7B%22rewrite_remote%22%3A%5B%22https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Ftrakt_simplified_chinese%2Ftrakt_simplified_chinese.snippet%2C%20tag%3DTrakt%20Simplified%20Chinese%2C%20enabled%3Dtrue%22%5D%7D">安装片段</a>',
             "脚本读取优先级：默认值 < BoxJs < 插件参数。已经在插件参数里填写的值会覆盖 BoxJs。",
         ],
     },

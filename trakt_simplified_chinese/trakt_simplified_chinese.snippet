@@ -1,25 +1,25 @@
 #!name=Trakt 增强
 #!desc=Trakt App 各页面从英文改为简体中文，支持中文标题、简介和海报；历史页面剧集类别的已观看记录按电视剧合并；Trakt 和 SofaTime 的影片详情页添加 EplayerX、Infuse 跳转按钮；部分兼容其它使用了 Trakt API 的应用。
-#!icon=https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/images/trakt.webp
-#!homepage=https://github.com/DemoJameson/Proxy.Modules
+#!icon=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/trakt.webp
+#!homepage=https://github.com/liixing/Proxy.Modules
 #!author=DemoJameson
 
 # [rewrite_remote]
 # 处理播放器 DeepLink 跳转
-^https:\/\/loon-plugins\.demojameson\.de5\.net\/api\/redirect\?.*$ url script-request-header https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/loon-plugins\.demojameson\.de5\.net\/api\/redirect\?.*$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # SofaTime 中自定义播放器 Logo
-^https:\/\/image\.tmdb\.org\/t\/p\/w342\/[a-z0-9_-]+_logo\.webp(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/image\.tmdb\.org\/t\/p\/w342\/[a-z0-9_-]+_logo\.webp(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 拦截 sync/history/episodes 请求，放大 limit
-^https:\/\/apiz?\.trakt\.tv\/sync\/history\/episodes\/?(\?.*)?$ url script-request-header https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/apiz?\.trakt\.tv\/sync\/history\/episodes\/?(\?.*)?$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 拦截 history/episodes 请求，放大 limit
-^https:\/\/apiz?\.trakt\.tv\/users\/[^\/]+?\/history\/episodes\/?(\?.*)?$ url script-request-header https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/apiz?\.trakt\.tv\/users\/[^\/]+?\/history\/episodes\/?(\?.*)?$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 拦截带季号的请求，记录当前浏览季
-^https:\/\/apiz?\.trakt\.tv\/shows\/[^\/]+\/seasons\/\d+(?:\/.*|\?.*)?$ url script-request-header https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/apiz?\.trakt\.tv\/shows\/[^\/]+\/seasons\/\d+(?:\/.*|\?.*)?$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 统一拦截 Trakt 响应，由脚本内部分流处理
-^https:\/\/apiz?\.trakt\.tv\/.*$ url script-response-body https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/apiz?\.trakt\.tv\/.*$ url script-response-body https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 仅拦截 SofaTime 的 TMDB provider 列表，注入播放器
-^https:\/\/api\.themoviedb\.org\/3\/watch\/providers\/(?:movie|tv)(\?.*)?$ url script-response-body https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/api\.themoviedb\.org\/3\/watch\/providers\/(?:movie|tv)(\?.*)?$ url script-response-body https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 仅拦截 SofaTime 的 TMDB 详情请求（append_to_response 含 watch/providers），清除原有观看来源并注入排序 1 播放器
-^https:\/\/api\.themoviedb\.org\/3\/(?:tv|movie)\/\d+\?.*watch(?:%2F|\/)providers.*$ url script-response-body https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/api\.themoviedb\.org\/3\/(?:tv|movie)\/\d+\?.*watch(?:%2F|\/)providers.*$ url script-response-body https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # [mitm]
 hostname = apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, loon-plugins.demojameson.de5.net

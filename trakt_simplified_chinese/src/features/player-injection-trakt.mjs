@@ -20,7 +20,7 @@ function createSourceDefinition(source, name, color) {
         link_count: 99999,
         color,
         images: {
-            logo: `raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/images/${source}.webp`,
+            logo: `raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/${source}.webp`,
             logo_colorized: null,
             channel: null,
         },

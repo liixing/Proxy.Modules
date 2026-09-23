@@ -475,7 +475,7 @@ test("TMDB 详情 flatrate 已有旧自定义条目时也会整体清除只留�
             US: {
                 link: "https://eplayerx.com/tmdb-info/detail?type=tv&id=108978",
                 flatrate: [
-                    { logo_path: "/forward_logo.webp", provider_id: 2, provider_name: "Forward", display_priority: 1 },
+                    { logo_path: "/old_logo.webp", provider_id: 2, provider_name: "Old Store", display_priority: 1 },
                     { logo_path: "/prime.jpg", provider_id: 119, provider_name: "Amazon Prime Video", display_priority: 2 },
                 ],
             },
@@ -510,7 +510,7 @@ test("TMDb provider catalog 会注入自定义 provider", async () => {
         ["EplayerX", "Infuse"],
     );
     assert.ok(payload.results.some((item) => item.provider_id === 8));
-    assert.equal(payload.results.filter((item) => item.provider_name === "Forward").length, 1);
+    assert.equal(payload.results.filter((item) => item.provider_id === 2).length, 1);
 });
 
 test("TMDb provider catalog 在自定义序号下会按序号升序重排自定义 provider", async () => {

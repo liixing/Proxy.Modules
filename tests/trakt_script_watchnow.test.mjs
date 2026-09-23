@@ -500,7 +500,7 @@ test("tmdb logo 请求会重定向到仓库内置 logo 资源", async () => {
     });
 
     assert.equal(result.response.status, 302);
-    assert.equal(result.response.headers.Location, "https://raw.githubusercontent.com/DemoJameson/Proxy.Modules/main/trakt_simplified_chinese/images/eplayerx_logo.webp");
+    assert.equal(result.response.headers.Location, "https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/eplayerx_logo.webp");
 });
 
 test("普通 TMDb 图片请求会添加 Accept image/webp 请求头", async () => {

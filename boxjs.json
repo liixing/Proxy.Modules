@@ -135,7 +135,7 @@
                 {
                     "id": "@dj_trakt_boxjs_configs.backendBaseUrl",
                     "name": "翻译缓存接口",
-                    "val": "https://proxy-modules.demojameson.de5.net",
+                    "val": "https://liixing-proxy-modules.lixing9605.workers.dev",
                     "type": "text",
                     "desc": "用于批量获取 Trakt 的中文翻译，一般留空即可"
                 },

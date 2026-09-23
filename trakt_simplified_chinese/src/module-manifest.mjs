@@ -3,7 +3,7 @@ const RAW_BASE_URL = "https://raw.githubusercontent.com/liixing/Proxy.Modules/ma
 const TRAKT_MODULE_PATH = "trakt_simplified_chinese";
 const TRAKT_SCRIPT_FILE = "trakt_simplified_chinese.js";
 const TRAKT_SCRIPT_TITLE = "Trakt增强";
-const DEFAULT_BACKEND_BASE_URL = "https://proxy-modules.demojameson.de5.net";
+const DEFAULT_BACKEND_BASE_URL = "https://liixing-proxy-modules.lixing9605.workers.dev";
 
 const metadata = {
     name: "Trakt 增强",
@@ -114,7 +114,7 @@ const scriptRules = [
         title: "Direct Redirect",
         comment: "处理播放器 DeepLink 跳转",
         phase: "http-request",
-        pattern: String.raw`^https:\/\/loon-plugins\.demojameson\.de5\.net\/api\/redirect\?.*$`,
+        pattern: String.raw`^https:\/\/liixing-proxy-modules\.lixing9605\.workers\.dev\/api\/redirect\?.*$`,
         scriptFile: TRAKT_SCRIPT_FILE,
         timeout: 10,
         argumentKeys: ALL_ARGUMENT_KEYS,
@@ -200,7 +200,7 @@ const scriptRules = [
     },
 ];
 
-const mitmHosts = ["apiz.trakt.tv", "api.trakt.tv", "api.themoviedb.org", "image.tmdb.org", "loon-plugins.demojameson.de5.net"];
+const mitmHosts = ["apiz.trakt.tv", "api.trakt.tv", "api.themoviedb.org", "image.tmdb.org", "liixing-proxy-modules.lixing9605.workers.dev"];
 
 const boxjs = {
     id: "demojameson.app.sub",

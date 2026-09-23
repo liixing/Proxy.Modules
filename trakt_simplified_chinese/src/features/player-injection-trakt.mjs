@@ -5,7 +5,7 @@ import * as traktTranslationHelper from "../shared/trakt-translation-helper.mjs"
 import * as cacheUtils from "../utils/cache.mjs";
 import * as commonUtils from "../utils/common.mjs";
 
-const WATCHNOW_REDIRECT_URL = "https://proxy-modules.demojameson.de5.net/api/redirect";
+const WATCHNOW_REDIRECT_URL = "https://liixing-proxy-modules.lixing9605.workers.dev/api/redirect";
 
 const WATCHNOW_DEFAULT_REGION = "us";
 const WATCHNOW_DEFAULT_CURRENCY = "usd";

@@ -1,0 +1,13 @@
+name = "liixing-proxy-modules"
+main = "cloudflare/worker.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+run_worker_first = true
+
+[[kv_namespaces]]
+binding = "TRAKT_CACHE"
+id = "0c9a0c6be2a24de38f3fdcc3e5237417"

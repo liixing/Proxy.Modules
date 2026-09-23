@@ -3,12 +3,12 @@
 #!icon=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/trakt.webp
 #!homepage=https://github.com/liixing/Proxy.Modules
 #!author=DemoJameson
-#!arguments=fakeVipEnabled:"true", posterImageMode:"原片语言", historyEpisodesMergedByShow:"true", translationEngine:"谷歌翻译", characterTranslationEnabled:"true", eplayerxButtonOrder:"1", infuseButtonOrder:"2", backendBaseUrl:"https://proxy-modules.demojameson.de5.net", debugMode:"关闭"
+#!arguments=fakeVipEnabled:"true", posterImageMode:"原片语言", historyEpisodesMergedByShow:"true", translationEngine:"谷歌翻译", characterTranslationEnabled:"true", eplayerxButtonOrder:"1", infuseButtonOrder:"2", backendBaseUrl:"https://liixing-proxy-modules.lixing9605.workers.dev", debugMode:"关闭"
 #!arguments-desc=fakeVipEnabled: 启用后伪装为 Trakt VIP 会员，移除 App 中的广告\nposterImageMode: 原片语言使用 TMDb 影片原始语言图片；中文使用 TMDb 中文图片；原图保留 Trakt 原图\nhistoryEpisodesMergedByShow: 启用后会将历史页面电视剧类别的观看记录按电视剧合并\ntranslationEngine: 选择翻译引擎：谷歌翻译（快，需翻墙）、DeepLX（慢，可直连）、关闭\ncharacterTranslationEnabled: 启用后会用豆瓣翻译角色名\neplayerxButtonOrder: 序号代表在 Trakt 中的排序位置，0 不显示，默认 1\ninfuseButtonOrder: 序号代表在 Trakt 中的排序位置，0 不显示，默认 2\nbackendBaseUrl: 用于批量获取 Trakt 的中文翻译，一般留空即可\ndebugMode: 禁用本地缓存：不读写持久化存储；禁用远端缓存：不请求后端缓存接口；禁用所有缓存：两者皆禁用
 
 [Script]
 # 处理播放器 DeepLink 跳转
-Direct Redirect = type=http-request, pattern=^https:\/\/loon-plugins\.demojameson\.de5\.net\/api\/redirect\?.*$, timeout=10, argument={{{fakeVipEnabled}}},{{{posterImageMode}}},{{{historyEpisodesMergedByShow}}},{{{translationEngine}}},{{{characterTranslationEnabled}}},{{{eplayerxButtonOrder}}},{{{infuseButtonOrder}}},{{{backendBaseUrl}}},{{{debugMode}}}, script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+Direct Redirect = type=http-request, pattern=^https:\/\/liixing-proxy-modules\.lixing9605\.workers\.dev\/api\/redirect\?.*$, timeout=10, argument={{{fakeVipEnabled}}},{{{posterImageMode}}},{{{historyEpisodesMergedByShow}}},{{{translationEngine}}},{{{characterTranslationEnabled}}},{{{eplayerxButtonOrder}}},{{{infuseButtonOrder}}},{{{backendBaseUrl}}},{{{debugMode}}}, script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # SofaTime 中自定义播放器 Logo
 TMDB Logo Redirect = type=http-request, pattern=^https:\/\/image\.tmdb\.org\/t\/p\/w342\/[a-z0-9_-]+_logo\.webp(?:\?.*)?$, timeout=10, argument={{{fakeVipEnabled}}},{{{posterImageMode}}},{{{historyEpisodesMergedByShow}}},{{{translationEngine}}},{{{characterTranslationEnabled}}},{{{eplayerxButtonOrder}}},{{{infuseButtonOrder}}},{{{backendBaseUrl}}},{{{debugMode}}}, script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 拦截 sync/history/episodes 请求，放大 limit
@@ -25,4 +25,4 @@ TMDB Provider Catalog = type=http-response, pattern=^https:\/\/api\.themoviedb\.
 TMDB Detail Watch Providers = type=http-response, pattern=^https:\/\/api\.themoviedb\.org\/3\/(?:tv|movie)\/\d+\?.*watch(?:%2F|\/)providers.*$, requires-body=true, max-size=0, timeout=60, argument={{{fakeVipEnabled}}},{{{posterImageMode}}},{{{historyEpisodesMergedByShow}}},{{{translationEngine}}},{{{characterTranslationEnabled}}},{{{eplayerxButtonOrder}}},{{{infuseButtonOrder}}},{{{backendBaseUrl}}},{{{debugMode}}}, script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 
 [MITM]
-hostname = %APPEND% apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, loon-plugins.demojameson.de5.net
+hostname = %APPEND% apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, liixing-proxy-modules.lixing9605.workers.dev

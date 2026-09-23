@@ -1,6 +1,6 @@
 import * as httpUtils from "../utils/http.mjs";
 
-const DEFAULT_BACKEND_BASE_URL = "https://proxy-modules.demojameson.de5.net";
+const DEFAULT_BACKEND_BASE_URL = "https://liixing-proxy-modules.lixing9605.workers.dev";
 // 发出 POST 请求后等待 100ms，尽量确保请求已被代理运行时真正发出
 const POST_DISPATCH_DELAY_MS = 100;
 

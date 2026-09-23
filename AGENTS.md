@@ -1,6 +1,6 @@
 ## 项目结构与模块组织
 
-本仓库是个人代理模块与 Trakt 翻译后端的组合项目，主要面向 Loon、Surge、Quantumult X 和 Vercel。
+本仓库是代理模块与 Trakt 翻译后端的组合项目，主要面向 Loon、Surge、Quantumult X 和 Cloudflare Workers。
 
 - `trakt_simplified_chinese/` 是核心模块目录，包含 Trakt 简体中文增强脚本、模块配置、图片资源和构建后的发布产物。
 - `trakt_simplified_chinese/src/` 是 Trakt 脚本源码，入口包括 `main.mjs`、`main-clear-cache.mjs`、`main-expand-cache.mjs`，请求/响应分派位于 `request.mjs`、`response.mjs`。

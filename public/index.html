@@ -4,28 +4,18 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Proxy.Modules</title>
-        <meta name="description" content="代理工具模块仓库，支持 Egern、Loon、Surge、Quantumult X 安装" />
+        <meta name="description" content="给 Surge、Loon、Egern、Quantumult X 用的模块。Trakt 简体中文，详情页可打开 EplayerX 和 Infuse。" />
         <style>
-            @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;600;700&display=swap");
-
             :root {
-                --bg: #f3ecdf;
-                --paper: rgba(255, 251, 245, 0.82);
-                --paper-strong: #fffaf2;
-                --ink: #191613;
-                --muted: #6d6358;
-                --line: rgba(25, 22, 19, 0.12);
-                --line-strong: rgba(25, 22, 19, 0.28);
-                --copper: #b65a36;
-                --copper-deep: #8b3a20;
-                --forest: #27453c;
-                --gold: #d6b36a;
-                --shadow: 0 24px 80px rgba(64, 36, 18, 0.12);
-                --radius-xl: 30px;
-                --radius-lg: 24px;
-                --radius-md: 18px;
-                --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-                --font-display: "Noto Serif SC", "Songti SC", serif;
+                --bg: #101114;
+                --bg-raise: #181b20;
+                --ink: #f4f1ea;
+                --muted: #aaa49a;
+                --line: rgba(244, 241, 234, 0.12);
+                --line-strong: rgba(244, 241, 234, 0.28);
+                --accent: #e7a15a;
+                --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+                --font: "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
             }
 
             * {
@@ -34,28 +24,19 @@
 
             html {
                 scroll-behavior: smooth;
+                overflow-x: clip;
             }
 
             body {
                 margin: 0;
                 min-height: 100vh;
+                overflow-x: clip;
                 color: var(--ink);
-                font-family: var(--font-body);
-                letter-spacing: 0.01em;
+                font-family: var(--font);
                 background:
-                    radial-gradient(circle at 15% 18%, rgba(182, 90, 54, 0.22), transparent 22%), radial-gradient(circle at 82% 12%, rgba(39, 69, 60, 0.18), transparent 18%),
-                    radial-gradient(circle at 50% 100%, rgba(214, 179, 106, 0.18), transparent 26%), linear-gradient(180deg, #f8f1e4 0%, #f1eadc 42%, #ece4d8 100%);
-            }
-
-            body::before {
-                content: "";
-                position: fixed;
-                inset: 0;
-                pointer-events: none;
-                opacity: 0.26;
-                background-image: linear-gradient(rgba(25, 22, 19, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(25, 22, 19, 0.03) 1px, transparent 1px);
-                background-size: 24px 24px;
-                mask-image: radial-gradient(circle at center, black 48%, transparent 92%);
+                    radial-gradient(900px 420px at 8% -10%, rgba(231, 161, 90, 0.16), transparent 60%),
+                    radial-gradient(700px 380px at 100% 0%, rgba(90, 122, 160, 0.12), transparent 55%),
+                    var(--bg);
             }
 
             a {
@@ -63,427 +44,287 @@
                 text-decoration: none;
             }
 
-            .page {
-                width: min(1180px, calc(100% - 28px));
+            .wrap {
+                width: min(1080px, calc(100vw - 40px));
                 margin: 0 auto;
-                padding: 28px 0 72px;
             }
 
-            .panel {
-                position: relative;
-                background: var(--paper);
-                border: 1px solid var(--line);
-                border-radius: var(--radius-xl);
-                box-shadow: var(--shadow);
-                backdrop-filter: blur(22px);
-                overflow: hidden;
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 22px 0 8px;
             }
 
-            .panel::after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-                background: linear-gradient(130deg, rgba(255, 255, 255, 0.28), transparent 26%), linear-gradient(320deg, rgba(182, 90, 54, 0.08), transparent 34%);
+            .brand {
+                font-size: 15px;
+                font-weight: 650;
+                letter-spacing: 0.01em;
+            }
+
+            .nav {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            .nav a:hover {
+                color: var(--ink);
             }
 
             .hero {
-                padding: 34px;
+                padding: 72px 0 28px;
             }
 
-            .hero-corner-link {
-                position: absolute;
-                top: 24px;
-                right: 24px;
-                z-index: 2;
-                width: 56px;
-                height: 56px;
-                min-height: 56px;
-                padding: 0;
-                border: none;
-                border-radius: 50%;
-                background: transparent;
-                color: var(--ink);
-                box-shadow: none;
-                backdrop-filter: none;
-                transition:
-                    transform 0.2s ease,
-                    color 0.2s ease;
-            }
-
-            .hero-corner-link:hover {
-                transform: translateY(-2px);
-                color: var(--copper-deep);
-            }
-
-            .hero-corner-link svg {
-                width: 40px;
-                height: 40px;
-                fill: currentColor;
-                overflow: visible;
-                transform: scale(1.14);
-                transform-origin: center;
-            }
-
-            h1,
-            h2,
-            h3 {
-                margin: 0;
-                font-family: var(--font-display);
-                font-weight: 600;
-                letter-spacing: -0.02em;
+            .kicker {
+                margin: 0 0 14px;
+                color: var(--accent);
+                font-size: 13px;
+                font-weight: 650;
+                letter-spacing: 0.06em;
+                overflow-wrap: anywhere;
             }
 
             h1 {
-                margin-top: 18px;
-                font-size: clamp(52px, 8vw, 92px);
-                line-height: 0.92;
-                font-weight: 700;
+                max-width: 14em;
+                margin: 0;
+                font-size: clamp(36px, 5vw, 56px);
+                font-weight: 640;
+                letter-spacing: -0.035em;
+                line-height: 1.12;
             }
 
             .lead {
-                max-width: 760px;
+                max-width: 38em;
                 margin: 18px 0 0;
                 color: var(--muted);
                 font-size: 17px;
-                line-height: 1.85;
-                letter-spacing: 0.015em;
-            }
-
-            .module-card {
-                position: relative;
-                z-index: 1;
+                line-height: 1.7;
             }
 
             .hero-actions {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 12px;
-                margin-top: 26px;
+                gap: 10px;
+                margin-top: 28px;
             }
 
             .button {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                min-height: 50px;
-                padding: 0 18px;
-                border-radius: 999px;
+                min-height: 44px;
+                padding: 0 16px;
                 border: 1px solid transparent;
-                font-family: var(--font-body);
-                font-weight: 700;
-                letter-spacing: 0.02em;
-                transition:
-                    transform 0.2s ease,
-                    border-color 0.2s ease,
-                    background-color 0.2s ease,
-                    color 0.2s ease;
-            }
-
-            .button:hover {
-                transform: translateY(-2px);
+                border-radius: 10px;
+                font: inherit;
+                font-size: 14px;
+                font-weight: 620;
             }
 
             .button.primary {
-                background: var(--copper);
-                color: #fff8f2;
+                background: var(--ink);
+                color: #16140f;
             }
 
             .button.primary:hover {
-                background: var(--copper-deep);
+                background: #fff;
             }
 
-            .button.primary.import-toggle,
-            .button.primary.import-toggle:hover,
-            .button.primary.import-toggle:active,
-            .button.primary.import-toggle:focus,
-            .button.primary.import-toggle:focus-visible,
-            .import-panel[open] .button.primary.import-toggle {
-                background: var(--copper);
-                color: #fff8f2;
-                border-color: transparent;
-                outline: none;
-                transform: none;
-            }
-
-            .button.secondary {
-                border-color: var(--line);
-                background: rgba(255, 255, 255, 0.58);
-            }
-
-            .button.secondary:hover {
+            .button.ghost {
                 border-color: var(--line-strong);
-                background: #fffefb;
+                color: var(--ink);
+                background: transparent;
             }
 
-            .section-head {
+            .button.ghost:hover {
+                border-color: var(--ink);
+            }
+
+            .catalog-head {
                 display: flex;
+                align-items: baseline;
                 justify-content: space-between;
-                align-items: end;
                 gap: 16px;
-                margin: 38px 0 18px;
+                margin: 36px 0 14px;
             }
 
-            .section-head h2 {
-                font-size: clamp(34px, 5vw, 50px);
-                line-height: 0.95;
-            }
-
-            .section-head p {
+            .catalog-head h2 {
                 margin: 0;
-                max-width: 580px;
+                font-size: 15px;
+                font-weight: 620;
+                letter-spacing: 0.04em;
+            }
+
+            .catalog-head p {
+                margin: 0;
                 color: var(--muted);
-                line-height: 1.8;
-                text-align: right;
+                font-size: 13px;
             }
 
             .catalog {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 22px;
+                grid-template-columns: 1.4fr 1fr;
+                gap: 16px;
+                padding-bottom: 72px;
             }
 
             .module-card {
-                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                padding: 22px;
                 border: 1px solid var(--line);
-                border-radius: var(--radius-lg);
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(249, 242, 232, 0.92)), linear-gradient(135deg, rgba(214, 179, 106, 0.12), transparent 42%);
-                transition:
-                    transform 0.22s ease,
-                    border-color 0.22s ease,
-                    box-shadow 0.22s ease;
-                animation: rise 0.6s ease both;
-            }
-
-            .module-card:hover {
-                transform: translateY(-4px);
-                border-color: rgba(182, 90, 54, 0.24);
-                box-shadow: 0 22px 56px rgba(70, 40, 22, 0.12);
-            }
-
-            .module-card:nth-child(2) {
-                animation-delay: 0.08s;
+                border-radius: 18px;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%), var(--bg-raise);
+                box-shadow: var(--shadow);
             }
 
             .module-head {
                 display: flex;
                 align-items: center;
-                gap: 16px;
+                gap: 14px;
             }
 
             .module-icon {
-                width: 58px;
-                height: 58px;
-                flex: 0 0 58px;
-                border-radius: 16px;
-                border: 1px solid rgba(25, 22, 19, 0.08);
-                background: rgba(255, 255, 255, 0.82);
-                box-shadow: 0 10px 24px rgba(64, 36, 18, 0.08);
+                width: 48px;
+                height: 48px;
+                flex: 0 0 48px;
+                border-radius: 12px;
                 object-fit: cover;
+                background: #0c0d10;
             }
 
             .module-card h3 {
-                font-size: clamp(24px, 2.6vw, 28px);
-                line-height: 1.05;
+                margin: 0;
+                font-size: 22px;
+                font-weight: 640;
+                letter-spacing: -0.03em;
             }
 
             .module-card p {
-                margin: 14px 0 0;
+                margin: 16px 0 0;
                 color: var(--muted);
-                line-height: 1.8;
-                letter-spacing: 0.015em;
-                min-height: 86px;
-            }
-
-            .import-group {
-                margin-top: 22px;
-                padding-top: 18px;
-                border-top: 1px solid var(--line);
+                font-size: 15px;
+                line-height: 1.7;
             }
 
             .tool-grid {
                 display: grid;
                 grid-template-columns: repeat(4, minmax(0, 1fr));
-                gap: 10px;
-                margin-top: 14px;
+                gap: 8px;
+                margin-top: auto;
+                padding-top: 22px;
             }
 
             .tool-link {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                min-height: 104px;
-                padding: 16px;
+                min-height: 42px;
                 border: 1px solid var(--line);
-                border-radius: var(--radius-md);
-                background: rgba(255, 255, 255, 0.7);
-                transition:
-                    transform 0.2s ease,
-                    border-color 0.2s ease,
-                    background-color 0.2s ease;
+                border-radius: 10px;
+                background: rgba(16, 17, 20, 0.45);
+                font-size: 14px;
+                font-weight: 620;
             }
 
             .tool-link:hover {
-                transform: translateY(-2px);
-                border-color: rgba(39, 69, 60, 0.24);
-                background: #fffefb;
+                border-color: var(--accent);
+                color: var(--accent);
             }
 
-            .tool-link .label {
-                font-size: 16px;
-                font-weight: 700;
-                text-align: center;
-                letter-spacing: 0.02em;
-            }
-
-            .import-toggle {
-                width: 100%;
-                justify-content: space-between;
-                padding: 0 20px;
-                cursor: pointer;
-            }
-
-            .import-toggle::after {
-                content: "+";
-                font-size: 22px;
-                line-height: 1;
-                transition: transform 0.2s ease;
-            }
-
-            .import-panel[open] .import-toggle::after {
-                transform: rotate(45deg);
-            }
-
-            .import-panel summary {
-                list-style: none;
-            }
-
-            .import-panel summary::-webkit-details-marker {
-                display: none;
-            }
-
-            .folder-link {
-                margin-top: 16px;
-                justify-content: space-between;
-                width: 100%;
-                padding: 0 18px;
-            }
-
-            .link-row {
+            .card-links {
                 display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                margin-top: 16px;
+                margin-top: 12px;
             }
 
-            @keyframes rise {
-                from {
-                    opacity: 0;
-                    transform: translateY(16px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            .card-links a {
+                color: var(--muted);
+                font-size: 13px;
             }
 
-            @media (max-width: 920px) {
-                .section-head {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .section-head p {
-                    text-align: left;
-                }
+            .card-links a:hover {
+                color: var(--ink);
             }
 
-            @media (max-width: 720px) {
-                .page {
-                    width: min(100% - 18px, 1180px);
-                    padding: 14px 0 44px;
+            @media (max-width: 800px) {
+                .wrap {
+                    width: calc(100vw - 32px);
                 }
 
-                .hero {
-                    padding: 22px;
+                .kicker {
+                    font-size: 12px;
+                    letter-spacing: 0.02em;
                 }
 
-                .hero-corner-link {
-                    top: 14px;
-                    right: 14px;
-                    width: 38px;
-                    height: 38px;
-                    min-height: 38px;
+                header {
+                    gap: 12px;
                 }
 
-                .hero-corner-link svg {
-                    width: 24px;
-                    height: 24px;
-                }
-
-                h1 {
-                    font-size: clamp(32px, 11vw, 48px);
-                }
-
-                .module-card {
-                    padding: 20px;
-                }
-
-                .module-card h3 {
-                    font-size: 24px;
-                }
-
-                .tool-grid {
-                    grid-template-columns: repeat(4, minmax(0, 1fr));
-                    gap: 8px;
-                }
-
-                .tool-link {
-                    min-height: 72px;
-                    padding: 12px 8px;
-                }
-
-                .tool-link .label {
+                .nav {
+                    gap: 14px;
                     font-size: 13px;
                 }
 
-                .module-card p {
-                    min-height: 0;
+                .hero {
+                    padding: 36px 0 12px;
+                }
+
+                h1 {
+                    font-size: 34px;
+                }
+
+                .catalog {
+                    grid-template-columns: 1fr;
+                }
+
+                .catalog-head {
+                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: 6px;
+                }
+
+                .tool-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
                 }
             }
         </style>
     </head>
     <body>
-        <main class="page">
-            <section class="panel hero">
-                <a class="button hero-corner-link" href="https://github.com/liixing/Proxy.Modules" target="_blank" rel="noreferrer" aria-label="GitHub 仓库">
-                    <svg viewBox="0 0 16 16" aria-hidden="true">
-                        <path
-                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.47 7.47 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                        ></path>
-                    </svg>
-                </a>
-                <div>
-                    <h1>Proxy.Modules</h1>
-                    <p class="lead">个人使用的代理工具脚本仓库</p>
-                    <div class="hero-actions">
-                        <a
-                            class="button secondary"
-                            href="http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Fboxjs.json"
-                            target="_blank"
-                            rel="noreferrer"
-                            >BoxJs 订阅</a
-                        >
-                    </div>
+        <div class="wrap">
+            <header>
+                <a class="brand" href="/">Proxy.Modules</a>
+                <nav class="nav">
+                    <a href="/admin">翻译管理</a>
+                    <a href="https://github.com/liixing/Proxy.Modules" target="_blank" rel="noreferrer">GitHub</a>
+                </nav>
+            </header>
+
+            <section class="hero">
+                <p class="kicker">SURGE · LOON · EGERN · QUANTUMULT X</p>
+                <h1>Trakt 换成简体中文，<br />详情页打开播放器。</h1>
+                <p class="lead">给代理工具用的模块。补上中文标题、简介和海报，把观看记录按电视剧合并，并从 Trakt、SofaTime 跳到 EplayerX 和 Infuse。</p>
+                <div class="hero-actions">
+                    <a
+                        class="button primary"
+                        href="http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2Fliixing%2FProxy.Modules%2Fmain%2Fboxjs.json"
+                        target="_blank"
+                        rel="noreferrer"
+                        >订阅到 BoxJs</a
+                    >
+                    <a class="button ghost" href="https://github.com/liixing/Proxy.Modules" target="_blank" rel="noreferrer">查看仓库</a>
                 </div>
             </section>
 
-            <section class="section-head" id="catalog">
-                <h2>脚本列表</h2>
-            </section>
-
+            <div class="catalog-head" id="catalog">
+                <h2>模块</h2>
+                <p>点客户端名称即可安装</p>
+            </div>
             <section class="catalog" id="module-list"></section>
-        </main>
+        </div>
 
         <script>
             const tools = {
@@ -539,7 +380,7 @@
                 {
                     id: "imdbapi_redirect_to_tiffara",
                     name: "修复 imdbapi.dev",
-                    description: "将 imdbapi.dev 及其所有子域名的请求重定向到 tiffara.com，保留子域名、路径和查询参数",
+                    description: "把 imdbapi.dev 及其子域名转到 tiffara.com，路径和查询参数保持不变。",
                     qxTag: "修复 imdbapi.dev",
                     icon: "https://raw.githubusercontent.com/liixing/Proxy.Modules/main/imdbapi_redirect_to_tiffara/imdb.png",
                     githubFolder: "https://github.com/liixing/Proxy.Modules/tree/main/imdbapi_redirect_to_tiffara",
@@ -551,10 +392,6 @@
                     },
                 },
             ];
-
-            function _findModule(moduleId) {
-                return modules.find((moduleItem) => moduleItem.id === moduleId) || null;
-            }
 
             function findResource(moduleItem, toolId) {
                 return moduleItem?.resources ? moduleItem.resources[toolId] : "";
@@ -583,15 +420,11 @@
             }
 
             function renderModuleCard(moduleItem) {
-                const toolCards = ["egern", "loon", "surge", "qx"]
+                const toolCards = ["surge", "loon", "egern", "qx"]
                     .map((toolId) => {
                         const tool = tools[toolId];
                         const importUrl = buildImportUrl(moduleItem, toolId);
-                        return `
-          <a class="tool-link" href="${importUrl}">
-            <span class="label">${tool.name}</span>
-          </a>
-        `;
+                        return `<a class="tool-link" href="${importUrl}">${tool.name}</a>`;
                     })
                     .join("");
 
@@ -602,15 +435,11 @@
             <h3>${escapeHtml(moduleItem.name)}</h3>
           </div>
           <p>${escapeHtml(moduleItem.description || "")}</p>
-          <details class="import-group import-panel">
-            <summary class="button primary import-toggle">安装</summary>
-            <div class="tool-grid">${toolCards}</div>
-          </details>
-          <div class="link-row">
-            <a class="button secondary folder-link" href="${moduleItem.githubFolder}" target="_blank" rel="noreferrer">查看代码</a>
+          <div class="tool-grid">${toolCards}</div>
+          <div class="card-links">
+            <a href="${moduleItem.githubFolder}" target="_blank" rel="noreferrer">查看代码</a>
           </div>
-        </article>
-      `;
+        </article>`;
             }
 
             function renderModules() {

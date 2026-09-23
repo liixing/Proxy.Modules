@@ -1,6 +1,6 @@
 # Proxy.Modules
 
-个人使用的网络工具模块仓库
+给 Surge、Loon、Egern 和 Quantumult X 用的网络工具模块。
 
 ## 脚本列表
 

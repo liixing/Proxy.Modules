@@ -191,12 +191,12 @@
             }
 
             .module-icon {
-                width: 48px;
-                height: 48px;
-                flex: 0 0 48px;
-                border-radius: 12px;
-                object-fit: cover;
-                background: #0c0d10;
+                height: 40px;
+                width: auto;
+                max-width: 76px;
+                flex: 0 0 auto;
+                object-fit: contain;
+                background: transparent;
             }
 
             .module-card h3 {
@@ -384,7 +384,7 @@
                     name: "修复 imdbapi.dev",
                     description: "把 imdbapi.dev 及其子域名转到 tiffara.com，路径和查询参数保持不变。",
                     qxTag: "修复 imdbapi.dev",
-                    icon: "https://raw.githubusercontent.com/liixing/Proxy.Modules/main/imdbapi_redirect_to_tiffara/imdb.png",
+                    icon: "/imdb-icon.png",
                     githubFolder: "https://github.com/liixing/Proxy.Modules/tree/main/imdbapi_redirect_to_tiffara",
                     resources: {
                         loon: "https://raw.githubusercontent.com/liixing/Proxy.Modules/main/imdbapi_redirect_to_tiffara/imdbapi_redirect_to_tiffara.plugin",

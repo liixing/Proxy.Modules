@@ -28,7 +28,7 @@ const DOUBAN_MOVIE_CREDITS_4707205_URL = "https://frodo.douban.com/api/v2/movie/
 const DOUBAN_TV_SEASONS_35517044_URL = "https://frodo.douban.com/api/v2/tv/35517044/seasons?apikey=0ac44ae016490db2204ce0a042db2916";
 const TRAKT_SHOW_123_DETAIL_URL = "https://api.trakt.tv/shows/123?extended=cloud9,full,watchnow";
 const TRAKT_SEASON_2_EPISODE_1_URL = "https://api.trakt.tv/shows/123/seasons/2/episodes/1?extended=cloud9,full,watchnow";
-const BACKEND_BASE_URL = "https://liixing-proxy-modules.lixing9605.workers.dev";
+const BACKEND_BASE_URL = "https://traktmodule.eplayerx.com";
 const BACKEND_DOUBAN_MOVIE_123_URL = `${BACKEND_BASE_URL}/api/trakt/credits?movies=123`;
 const BACKEND_PEOPLE_NAMES_42_URL = `${BACKEND_BASE_URL}/api/trakt/people-names?people=42`;
 const BACKEND_PEOPLE_NAMES_URL = `${BACKEND_BASE_URL}/api/trakt/people-names`;

@@ -6,7 +6,7 @@
 
 # [rewrite_remote]
 # 处理播放器 DeepLink 跳转
-^https:\/\/liixing-proxy-modules\.lixing9605\.workers\.dev\/api\/redirect\?.*$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
+^https:\/\/traktmodule\.eplayerx\.com\/api\/redirect\?.*$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # SofaTime 中自定义播放器 Logo
 ^https:\/\/image\.tmdb\.org\/t\/p\/w342\/[a-z0-9_-]+_logo\.webp(?:\?.*)?$ url script-request-header https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # 拦截 sync/history/episodes 请求，放大 limit
@@ -22,4 +22,4 @@
 # 仅拦截 SofaTime 的 TMDB 详情请求（append_to_response 含 watch/providers），清除原有观看来源并注入排序 1 播放器
 ^https:\/\/api\.themoviedb\.org\/3\/(?:tv|movie)\/\d+\?.*watch(?:%2F|\/)providers.*$ url script-response-body https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js
 # [mitm]
-hostname = apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, liixing-proxy-modules.lixing9605.workers.dev
+hostname = apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, traktmodule.eplayerx.com

@@ -1,12 +1,18 @@
 name = "liixing-proxy-modules"
 main = "cloudflare/worker.js"
+workers_dev = true
 compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "public"
 binding = "ASSETS"
-run_worker_first = ["/api/*", "/admin", "/admin/"]
+html_handling = "none"
+run_worker_first = ["/", "/api/*", "/admin", "/admin/"]
+
+[[routes]]
+pattern = "traktmodule.eplayerx.com"
+custom_domain = true
 
 [[kv_namespaces]]
 binding = "TRAKT_CACHE"

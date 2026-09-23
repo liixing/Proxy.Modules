@@ -150,6 +150,11 @@ async function fetch(request, env, ctx) {
         return redirectResponse;
     }
 
+    if (url.pathname === "/" || url.pathname === "") {
+        url.pathname = "/index.html";
+        return env.ASSETS.fetch(new Request(url, request));
+    }
+
     if (url.pathname === "/admin" || url.pathname === "/admin/") {
         url.pathname = "/admin.html";
         return env.ASSETS.fetch(new Request(url, request));

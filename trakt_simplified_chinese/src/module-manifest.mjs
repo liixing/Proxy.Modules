@@ -3,7 +3,8 @@ const RAW_BASE_URL = "https://raw.githubusercontent.com/liixing/Proxy.Modules/ma
 const TRAKT_MODULE_PATH = "trakt_simplified_chinese";
 const TRAKT_SCRIPT_FILE = "trakt_simplified_chinese.js";
 const TRAKT_SCRIPT_TITLE = "Trakt增强";
-const DEFAULT_BACKEND_BASE_URL = "https://liixing-proxy-modules.lixing9605.workers.dev";
+const DEFAULT_BACKEND_BASE_URL = "https://traktmodule.eplayerx.com";
+const DEFAULT_BACKEND_HOST = new URL(DEFAULT_BACKEND_BASE_URL).hostname;
 
 const metadata = {
     name: "Trakt 增强",
@@ -114,7 +115,7 @@ const scriptRules = [
         title: "Direct Redirect",
         comment: "处理播放器 DeepLink 跳转",
         phase: "http-request",
-        pattern: String.raw`^https:\/\/liixing-proxy-modules\.lixing9605\.workers\.dev\/api\/redirect\?.*$`,
+        pattern: `^https:\\/\\/${DEFAULT_BACKEND_HOST.replaceAll(".", "\\.")}\\/api\\/redirect\\?.*$`,
         scriptFile: TRAKT_SCRIPT_FILE,
         timeout: 10,
         argumentKeys: ALL_ARGUMENT_KEYS,
@@ -200,7 +201,7 @@ const scriptRules = [
     },
 ];
 
-const mitmHosts = ["apiz.trakt.tv", "api.trakt.tv", "api.themoviedb.org", "image.tmdb.org", "liixing-proxy-modules.lixing9605.workers.dev"];
+const mitmHosts = ["apiz.trakt.tv", "api.trakt.tv", "api.themoviedb.org", "image.tmdb.org", DEFAULT_BACKEND_HOST];
 
 const boxjs = {
     id: "liixing.app.sub",

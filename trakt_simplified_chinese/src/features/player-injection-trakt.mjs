@@ -1,3 +1,4 @@
+import { DEFAULT_BACKEND_BASE_URL } from "../module-manifest.mjs";
 import * as mediaTypes from "../shared/media-types.mjs";
 import * as playerDefinitions from "../shared/player-definitions.mjs";
 import * as traktLinkIds from "../shared/trakt-link-ids.mjs";
@@ -5,7 +6,7 @@ import * as traktTranslationHelper from "../shared/trakt-translation-helper.mjs"
 import * as cacheUtils from "../utils/cache.mjs";
 import * as commonUtils from "../utils/common.mjs";
 
-const WATCHNOW_REDIRECT_URL = "https://liixing-proxy-modules.lixing9605.workers.dev/api/redirect";
+const WATCHNOW_REDIRECT_URL = `${DEFAULT_BACKEND_BASE_URL}/api/redirect`;
 
 const WATCHNOW_DEFAULT_REGION = "us";
 const WATCHNOW_DEFAULT_CURRENCY = "usd";

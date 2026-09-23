@@ -13,14 +13,14 @@ translationEngine = select,"谷歌翻译","DeepLX","关闭",tag=翻译部分文�
 characterTranslationEnabled = switch, "true", tag=用豆瓣翻译角色名, desc=启用后会用豆瓣翻译角色名
 eplayerxButtonOrder = select,"1","2","0",tag=EplayerX 跳转按钮,desc=序号代表在 Trakt 中的排序位置，0 不显示，默认 1
 infuseButtonOrder = select,"1","2","0",tag=Infuse 跳转按钮,desc=序号代表在 Trakt 中的排序位置，0 不显示，默认 2
-backendBaseUrl = input, "https://liixing-proxy-modules.lixing9605.workers.dev", tag=翻译缓存接口, desc=用于批量获取 Trakt 的中文翻译，一般留空即可
+backendBaseUrl = input, "https://traktmodule.eplayerx.com", tag=翻译缓存接口, desc=用于批量获取 Trakt 的中文翻译，一般留空即可
 debugMode = select,"关闭","禁用本地缓存","禁用远端缓存","禁用所有缓存",tag=调试模式,desc=禁用本地缓存：不读写持久化存储；禁用远端缓存：不请求后端缓存接口；禁用所有缓存：两者皆禁用
 
 [Script]
 # 手动清理本地缓存脚本
 cron "0 0 1 1 1" script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese_clear_cache.js, timeout=10, enable=false, tag=手动清理本地缓存脚本
 # 处理播放器 DeepLink 跳转
-http-request ^https:\/\/liixing-proxy-modules\.lixing9605\.workers\.dev\/api\/redirect\?.*$ script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js, timeout=10, argument=[{fakeVipEnabled},{posterImageMode},{historyEpisodesMergedByShow},{translationEngine},{characterTranslationEnabled},{eplayerxButtonOrder},{infuseButtonOrder},{backendBaseUrl},{debugMode}], tag=Direct Redirect
+http-request ^https:\/\/traktmodule\.eplayerx\.com\/api\/redirect\?.*$ script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js, timeout=10, argument=[{fakeVipEnabled},{posterImageMode},{historyEpisodesMergedByShow},{translationEngine},{characterTranslationEnabled},{eplayerxButtonOrder},{infuseButtonOrder},{backendBaseUrl},{debugMode}], tag=Direct Redirect
 # SofaTime 中自定义播放器 Logo
 http-request ^https:\/\/image\.tmdb\.org\/t\/p\/w342\/[a-z0-9_-]+_logo\.webp(?:\?.*)?$ script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese.js, timeout=10, argument=[{fakeVipEnabled},{posterImageMode},{historyEpisodesMergedByShow},{translationEngine},{characterTranslationEnabled},{eplayerxButtonOrder},{infuseButtonOrder},{backendBaseUrl},{debugMode}], tag=TMDB Logo Redirect
 # 拦截 sync/history/episodes 请求，放大 limit
@@ -39,4 +39,4 @@ http-response ^https:\/\/api\.themoviedb\.org\/3\/(?:tv|movie)\/\d+\?.*watch(?:%
 cron "0 0 1 1 1" script-path=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/trakt_simplified_chinese_expand_cache.js, timeout=10, enable=false, tag=缓存压力测试脚本
 
 [MITM]
-hostname = apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, liixing-proxy-modules.lixing9605.workers.dev
+hostname = apiz.trakt.tv, api.trakt.tv, api.themoviedb.org, image.tmdb.org, traktmodule.eplayerx.com

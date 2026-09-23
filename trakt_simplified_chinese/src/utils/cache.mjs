@@ -1,8 +1,8 @@
 import * as translationCache from "../shared/translation-cache.mjs";
 import * as commonUtils from "../utils/common.mjs";
 
-const UNIFIED_CACHE_KEY = "dj_trakt_unified_cache";
-const UNIFIED_CACHE_REV_KEY = "dj_trakt_unified_cache_rev";
+const UNIFIED_CACHE_KEY = "liixing_trakt_unified_cache";
+const UNIFIED_CACHE_REV_KEY = "liixing_trakt_unified_cache_rev";
 const UNIFIED_CACHE_SCHEMA_VERSION = 14;
 const DOUBAN_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const UNIFIED_CACHE_MAX_BYTES = 1024 * 1024;

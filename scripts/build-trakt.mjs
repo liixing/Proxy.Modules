@@ -3,15 +3,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 
-import { argumentFields, boxjs, metadata, mitmHosts, scriptRules } from "../trakt_simplified_chinese/src/module-manifest.mjs";
+import { argumentFields, BOXJS_CONFIG_KEY, boxjs, metadata, mitmHosts, scriptRules } from "../trakt_simplified_chinese/src/module-manifest.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const envCacheFile = path.join(rootDir, "scripts", "vendor", "Env.js");
 const envModuleFile = path.join(rootDir, "scripts", "vendor", "Env.module.mjs");
-const envSourceUrl = "https://github.com/DemoJameson/scripts/blob/feat-more-env/Env.js";
 const externalModules = ["fs", "path", "got", "tough-cookie", "iconv-lite"];
-const isSyncEnvMode = process.argv.includes("--sync-env");
 const scriptBaseUrl = `${metadata.rawBaseUrl}/${metadata.modulePath}`;
 
 const buildTargets = [
@@ -42,48 +40,18 @@ async function readEnvSourceFromCache() {
     return fs.readFile(envCacheFile, "utf8");
 }
 
-function resolveEnvFetchUrl(url) {
-    const githubBlobMatch = String(url).match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)$/);
-
-    if (githubBlobMatch) {
-        const [, owner, repo, ref, filePath] = githubBlobMatch;
-        return `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${ref}/${filePath}`;
-    }
-
-    return url;
-}
-
-async function fetchEnvSource() {
-    const response = await fetch(resolveEnvFetchUrl(envSourceUrl));
-    if (!response.ok) {
-        throw new Error(`Failed to fetch Env.js: ${response.status} ${response.statusText}`);
-    }
-
-    return response.text();
-}
-
-async function writeEnvCache(source) {
-    await fs.mkdir(path.dirname(envCacheFile), { recursive: true });
-    await fs.writeFile(envCacheFile, source, "utf8");
-}
-
 async function writeEnvModule(source) {
     const moduleSource = `${source.trim()}\n\nexport { Env };\nexport default Env;\n`;
     await fs.mkdir(path.dirname(envModuleFile), { recursive: true });
     await fs.writeFile(envModuleFile, moduleSource, "utf8");
 }
 
-async function ensureEnvSource(forceRefresh = false) {
-    const hasCache = await fileExists(envCacheFile);
-
-    if (!forceRefresh && hasCache) {
-        const envSource = await readEnvSourceFromCache();
-        await writeEnvModule(envSource);
-        return envSource;
+async function ensureEnvSource() {
+    if (!(await fileExists(envCacheFile))) {
+        throw new Error("scripts/vendor/Env.js is missing");
     }
 
-    const envSource = await fetchEnvSource();
-    await writeEnvCache(envSource);
+    const envSource = await readEnvSourceFromCache();
     await writeEnvModule(envSource);
     return envSource;
 }
@@ -357,7 +325,7 @@ function renderSnippet() {
 }
 
 function renderBoxjs() {
-    const storagePrefix = "@dj_trakt_boxjs_configs";
+    const storagePrefix = `@${BOXJS_CONFIG_KEY}`;
     const keys = argumentFields.map((field) => `${storagePrefix}.${field.key}`);
     const app = {
         id: boxjs.app.id,
@@ -408,7 +376,7 @@ async function writeGeneratedTargets() {
 }
 
 async function buildTrakt() {
-    await ensureEnvSource(isSyncEnvMode);
+    await ensureEnvSource();
 
     for (const target of buildTargets) {
         const scriptSource = await buildBundle(target.entryPoint);

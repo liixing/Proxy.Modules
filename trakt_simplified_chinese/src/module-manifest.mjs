@@ -12,14 +12,14 @@ const metadata = {
     icon: `${RAW_BASE_URL}/${TRAKT_MODULE_PATH}/images/trakt.webp`,
     homepage: REPOSITORY_URL,
     openUrl: "https://apps.apple.com/app/id1514873602",
-    author: "DemoJameson",
+    author: "liixing",
     repositoryUrl: REPOSITORY_URL,
     moduleRepositoryUrl: `${REPOSITORY_URL}/tree/main/${TRAKT_MODULE_PATH}`,
     rawBaseUrl: RAW_BASE_URL,
     modulePath: TRAKT_MODULE_PATH,
 };
 
-const BOXJS_CONFIG_KEY = "dj_trakt_boxjs_configs";
+const BOXJS_CONFIG_KEY = "liixing_trakt_boxjs_configs";
 
 const argumentFields = [
     {
@@ -203,15 +203,15 @@ const scriptRules = [
 const mitmHosts = ["apiz.trakt.tv", "api.trakt.tv", "api.themoviedb.org", "image.tmdb.org", "liixing-proxy-modules.lixing9605.workers.dev"];
 
 const boxjs = {
-    id: "demojameson.app.sub",
-    name: "DemoJameson 应用订阅",
-    description: "DemoJameson 的 BoxJs 订阅",
-    author: "@DemoJameson",
+    id: "liixing.app.sub",
+    name: "liixing 应用订阅",
+    description: "liixing 的 BoxJs 订阅",
+    author: "@liixing",
     repo: REPOSITORY_URL,
-    icon: "https://avatars.githubusercontent.com/u/181192?v=4",
+    icon: "https://github.com/liixing.png",
     app: {
-        id: "demojameson_trakt_simplified_chinese",
-        author: "@DemoJameson",
+        id: "liixing_trakt_simplified_chinese",
+        author: "@liixing",
         repo: `${REPOSITORY_URL}/tree/main/${TRAKT_MODULE_PATH}`,
         icons: [metadata.icon, metadata.icon],
         descsHtml: [

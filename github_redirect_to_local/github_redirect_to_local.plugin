@@ -2,7 +2,7 @@
 #!desc=将指定仓库的 raw.githubusercontent.com 请求重定向到本地测试服务，例如把 https://raw.githubusercontent.com/liixing/Proxy.Modules/main/a.js 转到 http://192.168.50.2:8080/Proxy.Modules/a.js
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
 #!homepage=https://github.com/liixing/Proxy.Modules
-#!author=DemoJameson
+#!author=liixing
 
 [Argument]
 localBaseUrl = input, "http://192.168.50.2:8080", tag=本地目标地址, desc=填写本地测试服务根地址，不要带结尾斜杠

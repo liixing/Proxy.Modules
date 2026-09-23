@@ -2,7 +2,7 @@
 #!desc=Trakt App 各页面从英文改为简体中文，支持中文标题、简介和海报；历史页面剧集类别的已观看记录按电视剧合并；Trakt 和 SofaTime 的影片详情页添加 EplayerX、Infuse 跳转按钮；部分兼容其它使用了 Trakt API 的应用。
 #!icon=https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/trakt.webp
 #!homepage=https://github.com/liixing/Proxy.Modules
-#!author=DemoJameson
+#!author=liixing
 #!arguments=fakeVipEnabled:"true", posterImageMode:"原片语言", historyEpisodesMergedByShow:"true", translationEngine:"谷歌翻译", characterTranslationEnabled:"true", eplayerxButtonOrder:"1", infuseButtonOrder:"2", backendBaseUrl:"https://liixing-proxy-modules.lixing9605.workers.dev", debugMode:"关闭"
 #!arguments-desc=fakeVipEnabled: 启用后伪装为 Trakt VIP 会员，移除 App 中的广告\nposterImageMode: 原片语言使用 TMDb 影片原始语言图片；中文使用 TMDb 中文图片；原图保留 Trakt 原图\nhistoryEpisodesMergedByShow: 启用后会将历史页面电视剧类别的观看记录按电视剧合并\ntranslationEngine: 选择翻译引擎：谷歌翻译（快，需翻墙）、DeepLX（慢，可直连）、关闭\ncharacterTranslationEnabled: 启用后会用豆瓣翻译角色名\neplayerxButtonOrder: 序号代表在 Trakt 中的排序位置，0 不显示，默认 1\ninfuseButtonOrder: 序号代表在 Trakt 中的排序位置，0 不显示，默认 2\nbackendBaseUrl: 用于批量获取 Trakt 的中文翻译，一般留空即可\ndebugMode: 禁用本地缓存：不读写持久化存储；禁用远端缓存：不请求后端缓存接口；禁用所有缓存：两者皆禁用
 

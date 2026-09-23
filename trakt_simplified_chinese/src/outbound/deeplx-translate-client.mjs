@@ -16,7 +16,7 @@ const {
     splitTextByLimit,
 } = translationBatching;
 
-const DEEPLX_TRANSLATE_API_URL = "https://deeplx.demojameson.de5.net/deepl";
+const DEEPLX_TRANSLATE_API_URL = "https://api.deeplx.org/translate";
 const DEEPLX_TARGET_LANGUAGE = "ZH";
 const DEEPLX_BATCH_SEPARATOR_PATTERN = "\\n¶\\d+¶\\n";
 const DEEPLX_MAX_TEXT_CHARACTERS = 1500;

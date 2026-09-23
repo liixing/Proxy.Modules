@@ -3,7 +3,7 @@
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Infuse.png
 #!homepage=https://github.com/liixing/Proxy.Modules
 #!openUrl=https://apps.apple.com/app/id1136220934
-#!author=DemoJameson
+#!author=liixing
 
 [Script]
 # 拦截 TMDB 电影详情 API，开启 requires-body 以修改响应

@@ -1,26 +1,26 @@
 {
-    "id": "demojameson.app.sub",
-    "name": "DemoJameson 应用订阅",
-    "description": "DemoJameson 的 BoxJs 订阅",
-    "author": "@DemoJameson",
+    "id": "liixing.app.sub",
+    "name": "liixing 应用订阅",
+    "description": "liixing 的 BoxJs 订阅",
+    "author": "@liixing",
     "repo": "https://github.com/liixing/Proxy.Modules",
-    "icon": "https://avatars.githubusercontent.com/u/181192?v=4",
+    "icon": "https://github.com/liixing.png",
     "apps": [
         {
-            "id": "demojameson_trakt_simplified_chinese",
+            "id": "liixing_trakt_simplified_chinese",
             "name": "Trakt 增强",
             "keys": [
-                "@dj_trakt_boxjs_configs.fakeVipEnabled",
-                "@dj_trakt_boxjs_configs.posterImageMode",
-                "@dj_trakt_boxjs_configs.historyEpisodesMergedByShow",
-                "@dj_trakt_boxjs_configs.translationEngine",
-                "@dj_trakt_boxjs_configs.characterTranslationEnabled",
-                "@dj_trakt_boxjs_configs.eplayerxButtonOrder",
-                "@dj_trakt_boxjs_configs.infuseButtonOrder",
-                "@dj_trakt_boxjs_configs.backendBaseUrl",
-                "@dj_trakt_boxjs_configs.debugMode"
+                "@liixing_trakt_boxjs_configs.fakeVipEnabled",
+                "@liixing_trakt_boxjs_configs.posterImageMode",
+                "@liixing_trakt_boxjs_configs.historyEpisodesMergedByShow",
+                "@liixing_trakt_boxjs_configs.translationEngine",
+                "@liixing_trakt_boxjs_configs.characterTranslationEnabled",
+                "@liixing_trakt_boxjs_configs.eplayerxButtonOrder",
+                "@liixing_trakt_boxjs_configs.infuseButtonOrder",
+                "@liixing_trakt_boxjs_configs.backendBaseUrl",
+                "@liixing_trakt_boxjs_configs.debugMode"
             ],
-            "author": "@DemoJameson",
+            "author": "@liixing",
             "repo": "https://github.com/liixing/Proxy.Modules/tree/main/trakt_simplified_chinese",
             "icons": [
                 "https://raw.githubusercontent.com/liixing/Proxy.Modules/main/trakt_simplified_chinese/images/trakt.webp",
@@ -28,14 +28,14 @@
             ],
             "settings": [
                 {
-                    "id": "@dj_trakt_boxjs_configs.fakeVipEnabled",
+                    "id": "@liixing_trakt_boxjs_configs.fakeVipEnabled",
                     "name": "伪装成 VIP",
                     "val": true,
                     "type": "boolean",
                     "desc": "启用后伪装为 Trakt VIP 会员，移除 App 中的广告"
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.posterImageMode",
+                    "id": "@liixing_trakt_boxjs_configs.posterImageMode",
                     "name": "海报语言",
                     "val": "original",
                     "type": "select",
@@ -56,14 +56,14 @@
                     ]
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.historyEpisodesMergedByShow",
+                    "id": "@liixing_trakt_boxjs_configs.historyEpisodesMergedByShow",
                     "name": "历史剧集按电视剧合并",
                     "val": true,
                     "type": "boolean",
                     "desc": "启用后会将历史页面电视剧类别的观看记录按电视剧合并"
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.translationEngine",
+                    "id": "@liixing_trakt_boxjs_configs.translationEngine",
                     "name": "翻译部分文本",
                     "val": "google",
                     "type": "select",
@@ -84,14 +84,14 @@
                     ]
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.characterTranslationEnabled",
+                    "id": "@liixing_trakt_boxjs_configs.characterTranslationEnabled",
                     "name": "用豆瓣翻译角色名",
                     "val": true,
                     "type": "boolean",
                     "desc": "启用后会用豆瓣翻译角色名"
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.eplayerxButtonOrder",
+                    "id": "@liixing_trakt_boxjs_configs.eplayerxButtonOrder",
                     "name": "EplayerX 跳转按钮",
                     "val": 1,
                     "type": "select",
@@ -112,7 +112,7 @@
                     ]
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.infuseButtonOrder",
+                    "id": "@liixing_trakt_boxjs_configs.infuseButtonOrder",
                     "name": "Infuse 跳转按钮",
                     "val": 2,
                     "type": "select",
@@ -133,14 +133,14 @@
                     ]
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.backendBaseUrl",
+                    "id": "@liixing_trakt_boxjs_configs.backendBaseUrl",
                     "name": "翻译缓存接口",
                     "val": "https://liixing-proxy-modules.lixing9605.workers.dev",
                     "type": "text",
                     "desc": "用于批量获取 Trakt 的中文翻译，一般留空即可"
                 },
                 {
-                    "id": "@dj_trakt_boxjs_configs.debugMode",
+                    "id": "@liixing_trakt_boxjs_configs.debugMode",
                     "name": "调试模式",
                     "val": "off",
                     "type": "select",

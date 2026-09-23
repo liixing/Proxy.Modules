@@ -2,7 +2,7 @@
 #!desc=将TMDB响应中的图片按模块指定的语言排序
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Infuse.png
 #!homepage=https://github.com/liixing/Proxy.Modules
-#!author=DemoJameson
+#!author=liixing
 #!arguments=preferredLanguage:"zh-CN"
 #!arguments-desc=preferredLanguage: 输入目标语言代码，如 zh-CN、zh-TW，默认为 zh-CN。
 

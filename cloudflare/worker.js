@@ -99,6 +99,38 @@ function createVercelResponse() {
     };
 }
 
+function handleRedirect(request, url) {
+    if (url.pathname !== "/api/redirect") {
+        return null;
+    }
+    if (request.method !== "GET" && request.method !== "HEAD") {
+        return Response.json({ error: "Method not allowed" }, { status: 405, headers: { Allow: "GET, HEAD" } });
+    }
+
+    const deeplink = url.searchParams.get("deeplink")?.trim() ?? "";
+    if (!deeplink) {
+        return Response.json({ error: "Missing deeplink query" }, { status: 400 });
+    }
+
+    return new Response(null, {
+        status: 302,
+        headers: {
+            "Cache-Control": "no-store",
+            Location: deeplink,
+        },
+    });
+}
+
+function isCacheableRead(request, url) {
+    return request.method === "GET" && url.pathname.startsWith("/api/trakt/") && !url.pathname.endsWith("/admin");
+}
+
+function sharedCacheTtl(response) {
+    const header = response.headers.get("CDN-Cache-Control") || "";
+    const match = header.match(/s-maxage=(\d+)/);
+    return match ? Number(match[1]) : 0;
+}
+
 async function handleApi(request, url) {
     const handler = ROUTES.get(url.pathname);
     if (!handler) {
@@ -111,24 +143,42 @@ async function handleApi(request, url) {
     return vercelResponse.toResponse();
 }
 
-async function fetch(request, env) {
-    applyWorkerEnv(env);
+async function fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const redirectResponse = handleRedirect(request, url);
+    if (redirectResponse) {
+        return redirectResponse;
+    }
+
     if (url.pathname === "/admin" || url.pathname === "/admin/") {
         url.pathname = "/admin.html";
         return env.ASSETS.fetch(new Request(url, request));
     }
 
+    const cacheable = isCacheableRead(request, url);
+    if (cacheable) {
+        const cached = await caches.default.match(request);
+        if (cached) {
+            return cached;
+        }
+    }
+
+    applyWorkerEnv(env);
     const apiResponse = await handleApi(request, url);
-    if (apiResponse) {
-        return apiResponse;
+    if (!apiResponse) {
+        return env.ASSETS ? env.ASSETS.fetch(request) : new Response("Not found", { status: 404 });
     }
 
-    if (env.ASSETS) {
-        return env.ASSETS.fetch(request);
+    if (cacheable && apiResponse.ok && ctx) {
+        const ttl = sharedCacheTtl(apiResponse);
+        if (ttl > 0) {
+            const cachedResponse = apiResponse.clone();
+            cachedResponse.headers.set("Cache-Control", `public, max-age=${ttl}`);
+            ctx.waitUntil(caches.default.put(request, cachedResponse));
+        }
     }
 
-    return new Response("Not found", { status: 404 });
+    return apiResponse;
 }
 
 export default {

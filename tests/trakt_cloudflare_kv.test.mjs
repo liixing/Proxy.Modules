@@ -56,8 +56,21 @@ test("Cloudflare KV pipeline stores JSON, applies TTL, and scans by prefix", asy
     assert.equal(values[0].translation.title, "标题");
     assert.equal(values[1], null);
 
-    const [ttl] = await pipelineCloudflareKv(kv, [["PTTL", "trakt:translation:movies:1"]]);
-    assert.ok(ttl > 0);
+    const readOptions = [];
+    const originalGet = kv.get.bind(kv);
+    kv.get = async (key, options) => {
+        readOptions.push(options);
+        return originalGet(key);
+    };
+    const ordered = await pipelineCloudflareKv(kv, [
+        ["JSON.GET", "trakt:translation:movies:1", "$"],
+        ["JSON.GET", "missing", "$"],
+        ["PTTL", "trakt:translation:movies:1"],
+    ]);
+    assert.equal(ordered[0].translation.title, "标题");
+    assert.equal(ordered[1], null);
+    assert.ok(ordered[2] > 0);
+    assert.deepEqual(readOptions[0], { type: "json", cacheTtl: 60 });
 
     const [missingTtl] = await pipelineCloudflareKv(kv, [["PTTL", "trakt:translation:movies:2"]]);
     assert.equal(missingTtl, -2);

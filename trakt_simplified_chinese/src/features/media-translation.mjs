@@ -93,6 +93,16 @@ async function handleMediaDetail() {
 
     const cache = cacheUtils.loadCache(context.env);
     const backendState = traktTranslationHelper.createBackendState(traktTranslationHelper.MEDIA_CONFIG);
+    const overridePromise = traktTranslationHelper.getOverrideForTarget(context.env, ref);
+    const imagePromise = traktTranslationHelper.shouldReplaceImages()
+        ? traktTranslationHelper.replaceImagesInPlace(data, mediaType, {
+              ...ref,
+              tmdbId: data?.ids?.tmdb ?? null,
+              imageMode: context.argument.posterImageMode,
+              language: data?.language ?? null,
+              country: data?.country ?? null,
+          })
+        : null;
     let cacheChanged = false;
     try {
         cacheChanged = await traktTranslationHelper.ensureDetailTranslation(
@@ -115,7 +125,7 @@ async function handleMediaDetail() {
 
     let override = null;
     try {
-        override = await traktTranslationHelper.getOverrideForTarget(context.env, ref);
+        override = await overridePromise;
         traktTranslationHelper.applyOverrideToTarget(data, override);
     } catch (error) {
         context.env.log(`Trakt backend override read failed: ${error}`);
@@ -125,14 +135,8 @@ async function handleMediaDetail() {
         { target: data, field: "overview", skip: isFieldOverridden(override, "overview") },
         { target: data, field: "tagline", skip: isFieldOverridden(override, "tagline") },
     ]);
-    if (traktTranslationHelper.shouldReplaceImages()) {
-        await traktTranslationHelper.replaceImagesInPlace(data, mediaType, {
-            ...ref,
-            tmdbId: data?.ids?.tmdb ?? null,
-            imageMode: context.argument.posterImageMode,
-            language: data?.language ?? null,
-            country: data?.country ?? null,
-        });
+    if (imagePromise) {
+        await imagePromise;
     }
     await fallbackPromise;
 
@@ -150,6 +154,7 @@ async function handleTranslations() {
     const merged = translationCache.normalizeTranslations(translationCache.sortTranslations(arr, traktTranslationHelper.PREFERRED_TRANSLATION_LANGUAGE));
 
     if (!traktTranslationHelper.isScriptInitiatedTranslationRequest() && target && traktTranslationHelper.buildMediaCacheLookupKey(target.mediaType, target)) {
+        const overridePromise = traktTranslationHelper.getOverrideForTarget(context.env, target);
         const normalized = translationCache.extractNormalizedTranslation(merged);
         const cache = cacheUtils.loadCache(context.env);
         const cachedEntry = traktTranslationHelper.getCachedTranslation(cache, target.mediaType, target);
@@ -171,7 +176,7 @@ async function handleTranslations() {
         }
 
         try {
-            traktTranslationHelper.applyOverrideToTranslations(merged, await traktTranslationHelper.getOverrideForTarget(context.env, target));
+            traktTranslationHelper.applyOverrideToTranslations(merged, await overridePromise);
         } catch (error) {
             context.env.log(`Trakt backend override read failed: ${error}`);
         }
